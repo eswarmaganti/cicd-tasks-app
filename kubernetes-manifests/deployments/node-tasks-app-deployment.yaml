@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-tasks-app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node-tasks-app
+  template:
+    metadata:
+      name: node-tasks-app-pod
+      labels:
+        app: node-tasks-app
+    spec:
+      containers:
+        - name: node-tasks-api
+          image: eswarmaganti/node-tasks-app:arm64
+          ports:
+            - containerPort: 5050
+          env:
+            - name: PORT
+              value: "5050"
+            - name: MONGODB_URI
+              value: mongodb://adminuser:admin1234@mongodb-service:27017/tasks?authSource=admin

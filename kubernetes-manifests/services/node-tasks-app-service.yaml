@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-tasks-app-service
+spec:
+  selector:
+    app: node-tasks-app
+  type: ClusterIP
+  ports:
+    - port: 5050
+      targetPort: 5050
