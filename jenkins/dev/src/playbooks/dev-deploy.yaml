@@ -1,0 +1,20 @@
+---
+- name: playbook to deploy the application to dev server
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: pull the changes of git repo
+      git:
+        repo: https://github.com/eswarmaganti/mern-tasks-app.git
+        dest: /opt/SP
+    - name: kill existing docker services
+      docker.docker_compose:
+        project_src: /opt/SP/mern-tasks-app
+        state: absent
+    - name: Start the docker services using compose file
+      docker.docker_compose:
+        project_src: /opt/SP/mern-tasks-app
+      register: output
+    - name: debug output
+      debug:
+        var: output
