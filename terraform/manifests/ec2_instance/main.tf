@@ -56,5 +56,6 @@ resource "null_resource" "file_provisioner" {
   provisioner "file" {
     source      = "/Users/eswarmaganti/.ssh/dev_ec2"
     destination = "/home/ubuntu/.ssh/dev_ec2"
+    
   }
 }

@@ -3,6 +3,11 @@
 # updating the package manager
 yes | sudo apt update 
 
+# install pip and python
+yes | sudo apt install python3
+yes | sudo apt install python3-pip
+yes | sudo apt install python3-docker
+
 # docker installation
 # Add Docker's official GPG key:
 yes | sudo apt-get update
@@ -27,3 +32,6 @@ yes | sudo reboot
 sudo mkdir /opt/SP
 sudo chown ubuntu: /opt/SP
 chmod 777 /opt/SP
+
+# changing the permissions of private key file
+sudo chmod 400 /home/ubuntu/.ssh/dev_ec2

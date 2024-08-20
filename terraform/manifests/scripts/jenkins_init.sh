@@ -14,7 +14,10 @@ yes | sudo apt-get update
 yes | sudo apt-get install jenkins
 
 
-#TODO: install pip and python
+# install pip and python
+yes | sudo apt install python3
+yes | sudo apt install python3-pip
+yes | sudo apt install python3-docker
 
 # ansible installation
 yes | sudo apt update

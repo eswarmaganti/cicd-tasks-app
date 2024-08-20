@@ -3,22 +3,26 @@
   hosts: all
   gather_facts: true
   tasks:
+
+    # pulling the latest compose file changes
     - name: pull the changes of git repo
       git:
         repo: https://github.com/eswarmaganti/mern-tasks-app.git
         dest: /opt/SP/mern-tasks-app
+    
+    # stopping existing docker container services
     - name: kill existing docker services
       community.docker.docker_compose_v2:
         project_src: /opt/SP/mern-tasks-app
         state: absent
-    # - name: Start the docker services using compose file
-    #   shell: |
-    #     cd /opt/SP/mern-tasks-app
-    #     docker compose up -d
+
+    # task to start the docker container services using compose
     - name: start the docker container services using compose
       community.docker.docker_compose_v2:
           project_src: /opt/SP/mern-tasks-app
       register: output
+
+    # debugging the output
     - name: debug output
       debug:
         var: output

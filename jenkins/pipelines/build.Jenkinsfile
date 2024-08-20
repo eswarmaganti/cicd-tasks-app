@@ -10,7 +10,7 @@ pipeline{
     stages{
         stage('CheckOut'){
             steps{
-                git url:${GIT_REPO_URL}, branch: 'main'
+                git url:GIT_REPO_URL, branch: 'main'
             }
         }
         stage('Build'){
@@ -18,6 +18,14 @@ pipeline{
                 script{
                     sh 'docker build -t eswarmaganti/react-tasks-app:latest ./react-client '
                     sh 'docker build -t eswarmaganti/node-tasks-app:latest ./tasks-api '
+                }
+                post{
+                    success{
+                        echo "Build Docker images is Succeded"
+                    }
+                    unsuccessful{
+                        echo "Build Docker images stage is Failed"
+                    }
                 }
             }
         }
@@ -30,6 +38,14 @@ pipeline{
                         sh 'docker push --all-tags eswarmaganti/node-tasks-app'
                     }
                     
+                }
+                post{
+                    success{
+                        echo "Push Images to Docker Hub Succeded"
+                    }
+                    unsuccessful{
+                        echo "Push Images to Docker Hub Failed"
+                    }
                 }
             }
         }
