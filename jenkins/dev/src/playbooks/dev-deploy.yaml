@@ -14,7 +14,7 @@
     - name: Start the docker services using compose file
       shell: |
         cd /opt/SP/mern-tasks-app
-        docker compose up
+        docker compose up -d
       register: output
     - name: debug output
       debug:
