@@ -6,14 +6,15 @@
     - name: pull the changes of git repo
       git:
         repo: https://github.com/eswarmaganti/mern-tasks-app.git
-        dest: /opt/SP
+        dest: /opt/SP/mern-tasks-app
     # - name: kill existing docker services
     #   docker_compose:
     #     project_src: /opt/SP/mern-tasks-app
     #     state: absent
     - name: Start the docker services using compose file
-      community.docker.docker_compose:
-        project_src: /opt/SP/mern-tasks-app
+      shell: |
+        cd /opt/SP/mern-tasks-app
+        docker compose up
       register: output
     - name: debug output
       debug:
