@@ -19,35 +19,29 @@ pipeline{
                     sh 'docker build -t eswarmaganti/react-tasks-app:latest ./react-client '
                     sh 'docker build -t eswarmaganti/node-tasks-app:latest ./tasks-api '
                 }
-                post{
-                    success{
-                        echo "Build Docker images is Succeded"
-                    }
-                    unsuccessful{
-                        echo "Build Docker images stage is Failed"
-                    }
-                }
+                
             }
         }
         stage('Push Images to Docker Hub'){
             steps{
                 script{
                     withCredentials([usernamePassword(credentialsId: 'dockerhub',usernameVariable:'dockerhub_username', passwordVariable:'dockerhub_password')]){
-                        sh 'docker login -u  ${env.dockerhub_username} -p ${env.dockerhub_password}'
+                        sh 'docker login -u  ${dockerhub_username} -p ${dockerhub_password}'
                         sh 'docker push --all-tags eswarmaganti/react-tasks-app'
                         sh 'docker push --all-tags eswarmaganti/node-tasks-app'
                     }
                     
                 }
-                post{
-                    success{
-                        echo "Push Images to Docker Hub Succeded"
-                    }
-                    unsuccessful{
-                        echo "Push Images to Docker Hub Failed"
-                    }
-                }
+                
             }
+        }
+    }
+    post{
+        success{
+            echo "Build is Succeded"
+        }
+        failure{
+            echo "Build is Failed"
         }
     }
 }
