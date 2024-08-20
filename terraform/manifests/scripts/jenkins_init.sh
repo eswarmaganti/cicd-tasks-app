@@ -13,6 +13,15 @@ echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" https://pkg.jenki
 yes | sudo apt-get update
 yes | sudo apt-get install jenkins
 
+
+# ansible installation
+yes | sudo apt update
+yes | sudo apt install software-properties-common
+yes | sudo add-apt-repository --yes --update ppa:ansible/ansible
+yes | sudo apt install ansible
+
+
+
 # docker installation
 # Add Docker's official GPG key:
 yes | sudo apt-get update
