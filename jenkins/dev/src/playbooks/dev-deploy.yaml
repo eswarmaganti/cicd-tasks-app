@@ -7,10 +7,10 @@
       git:
         repo: https://github.com/eswarmaganti/mern-tasks-app.git
         dest: /opt/SP
-    - name: kill existing docker services
-      docker_compose:
-        project_src: /opt/SP/mern-tasks-app
-        state: absent
+    # - name: kill existing docker services
+    #   docker_compose:
+    #     project_src: /opt/SP/mern-tasks-app
+    #     state: absent
     - name: Start the docker services using compose file
       docker_compose:
         project_src: /opt/SP/mern-tasks-app

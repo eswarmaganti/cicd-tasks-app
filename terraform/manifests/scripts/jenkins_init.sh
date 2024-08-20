@@ -14,6 +14,8 @@ yes | sudo apt-get update
 yes | sudo apt-get install jenkins
 
 
+#TODO: install pip and python
+
 # ansible installation
 yes | sudo apt update
 yes | sudo apt install software-properties-common
