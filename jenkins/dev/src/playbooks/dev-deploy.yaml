@@ -7,14 +7,17 @@
       git:
         repo: https://github.com/eswarmaganti/mern-tasks-app.git
         dest: /opt/SP/mern-tasks-app
-    # - name: kill existing docker services
-    #   docker_compose:
-    #     project_src: /opt/SP/mern-tasks-app
-    #     state: absent
-    - name: Start the docker services using compose file
-      shell: |
-        cd /opt/SP/mern-tasks-app
-        docker compose up -d
+    - name: kill existing docker services
+      community.docker.docker_compose_v2:
+        project_src: /opt/SP/mern-tasks-app
+        state: absent
+    # - name: Start the docker services using compose file
+    #   shell: |
+    #     cd /opt/SP/mern-tasks-app
+    #     docker compose up -d
+    - name: start the docker container services using compose
+      community.docker.docker_compose_v2:
+          project_src: /opt/SP/mern-tasks-app
       register: output
     - name: debug output
       debug:
