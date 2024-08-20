@@ -2,6 +2,8 @@
 - name: playbook to deploy the application to dev server
   hosts: all
   gather_facts: true
+  vars:
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
   tasks:
 
     # pulling the latest compose file changes
