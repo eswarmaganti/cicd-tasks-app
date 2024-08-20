@@ -12,7 +12,7 @@
     #     project_src: /opt/SP/mern-tasks-app
     #     state: absent
     - name: Start the docker services using compose file
-      docker_compose:
+      community.docker.docker_compose:
         project_src: /opt/SP/mern-tasks-app
       register: output
     - name: debug output
