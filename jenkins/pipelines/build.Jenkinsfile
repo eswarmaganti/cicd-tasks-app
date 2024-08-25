@@ -46,9 +46,9 @@ pipeline{
                 }
             }
         }
-        stage('Sonar Quality Gate Check'){
+        // stage('Sonar Quality Gate Check'){
 
-        }
+        // }
 
         stage('Build'){
             steps{
@@ -84,7 +84,7 @@ pipeline{
                 
         }
     }
-    
+
     post{
         success{
             echo "Build is Succeded"
