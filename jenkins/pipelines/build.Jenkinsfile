@@ -46,9 +46,14 @@ pipeline{
                 }
             }
         }
-        // stage('Sonar Quality Gate Check'){
-
-        // }
+        
+        stage('Sonar Quality Gate Check'){
+            steps{
+                timeout(time:1,units:'HOURS'){
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
 
         stage('Build'){
             steps{
@@ -68,7 +73,7 @@ pipeline{
             steps{
                 sh "echo '-- Trivy Docker Image Scan --'"
                 sh 'trivy image eswarmaganti/react-tasks-app:latest'
-                sh 'trivy image eswarmaganti/react-tasks-app:latest'
+                sh 'trivy image eswarmaganti/node-tasks-app:latest'
             }
         }
 
