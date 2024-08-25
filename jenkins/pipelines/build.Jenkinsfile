@@ -82,9 +82,9 @@ pipeline{
                     
                 }
                 
-            }
         }
     }
+    
     post{
         success{
             echo "Build is Succeded"
