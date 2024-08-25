@@ -53,9 +53,12 @@ pipeline{
         stage('Build'){
             steps{
                 script{
-                    sh "echo '---- Building the Docker Images frontend react-tasks-app & backend node-tasks-app -----'"
-                    sh 'docker build -t eswarmaganti/react-tasks-app:latest ./react-client '
-                    sh 'docker build -t eswarmaganti/node-tasks-app:latest ./tasks-api '
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub',usernameVariable:'dockerhub_username', passwordVariable:'dockerhub_password')]){
+                        sh "echo '---- Building the Docker Images frontend react-tasks-app & backend node-tasks-app -----'"
+                        sh 'echo ${dockerhub_password} | docker login -u  ${dockerhub_username} --password-stdin'
+                        sh 'docker build -t eswarmaganti/react-tasks-app:latest ./react-client '
+                        sh 'docker build -t eswarmaganti/node-tasks-app:latest ./tasks-api '
+                    }
                 }
                 
             }
@@ -72,11 +75,9 @@ pipeline{
         stage('Push Images to Docker Hub'){
             steps{
                 script{
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub',usernameVariable:'dockerhub_username', passwordVariable:'dockerhub_password')]){
                         sh "echo '---- Pushing the Docker images to DockerHub ----'"
-                        sh 'docker login -u  ${dockerhub_username} -p ${dockerhub_password}'
-                        sh 'docker push --all-tags eswarmaganti/react-tasks-app'
-                        sh 'docker push --all-tags eswarmaganti/node-tasks-app'
+                        sh 'docker push eswarmaganti/react-tasks-app:latest'
+                        sh 'docker push eswarmaganti/node-tasks-app:latest'
                     }
                     
                 }
