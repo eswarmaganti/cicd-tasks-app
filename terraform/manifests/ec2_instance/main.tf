@@ -12,7 +12,7 @@ resource "aws_instance" "dev_ec2" {
   instance_type          = var.dev_instance_type
   key_name               = aws_key_pair.dev_ec2_keypair.key_name
   vpc_security_group_ids = [var.dev_server_sg_id]
-  user_data              = templatefile("./scripts/init.sh", {})
+  user_data              = templatefile("./scripts/dev_server_init.sh", {})
   tags = {
     name = "Dev Server"
   }
