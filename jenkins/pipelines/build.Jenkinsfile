@@ -49,7 +49,7 @@ pipeline{
         
         stage('Sonar Quality Gate Check'){
             steps{
-                timeout(time:1,units:'HOURS'){
+                timeout(time:1,unit:'HOURS'){
                     waitForQualityGate abortPipeline: true
                 }
             }
