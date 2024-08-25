@@ -41,7 +41,7 @@ pipeline{
                     sh "echo '----- SonarQube Scanner Verison Details ------'"
                     sh '${ScannerHome}/bin/sonar-scanner --version'
 
-                    sh "echi '-- Running Code Quality Analysis --'"
+                    sh "echo '-- Running Code Quality Analysis --'"
                     sh '${ScannerHome}/bin/sonar-scanner'
                 }
             }
