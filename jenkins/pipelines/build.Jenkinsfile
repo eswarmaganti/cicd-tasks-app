@@ -15,7 +15,7 @@ pipeline{
     stages{
         stage('Environment'){
             steps{
-                sh echo '-- Environment Runtimes --'
+                sh 'echo -- Environment Runtimes --'
                 sh 'python3 --version'
                 sh 'git --version'
                 sh 'java --version'
