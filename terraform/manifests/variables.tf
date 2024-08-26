@@ -46,3 +46,13 @@ variable "private_subnet_cidrs" {
   type = list(string)
   description = "the cidr blocks for private subnets"
 }
+
+variable "domain_name" {
+  type = string
+  description = "domain name of entire project"
+}
+
+variable "app_domain_name" {
+  type = string
+  description = "subdomain of applicaion"
+}

@@ -71,4 +71,6 @@ sudo chown -R ubuntu: /opt/SP
 # change the permissions for private key
 echo '--- Modifying the privatekey file permissions ---'
 sudo chmod 400 /home/ubuntu/.ssh/dev_ec2
+sudo cp /home/ubuntu/.ssh/dev_ec2 /var/lib/jenkins/.ssh/
+sudo chown jenkins: /var/lib/jenkins/.ssh/dev_ec2
 yes | sudo reboot

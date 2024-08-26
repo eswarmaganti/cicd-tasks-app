@@ -1,18 +1,6 @@
 
-variable "dev_instance_type" {
-  type = string
-}
 
-
-variable "public_key_name" {
-  type = string
-}
-
-variable "public_key_value" {
-  type = string
-}
-
-variable "dev_server_sg_id" {
+variable "jenkins_ec2_keypair_name" {
   type = string
 }
 
