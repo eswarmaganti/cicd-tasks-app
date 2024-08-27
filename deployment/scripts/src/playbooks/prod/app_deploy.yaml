@@ -1,0 +1,29 @@
+---
+- name: Deploying the Application to AWS EKS Kubernetes
+  hosts: localhost
+  become: true
+  gather_facts: true
+  vars:
+    kube_deployment_manifest_path: "kubernetes-manifests/deployments"
+    kube_svc_manifest_path: "kubernetes-manifests/services"
+  tasks:
+    - name: Create Kubernetes Deployments and Services
+      shell: |
+        kubectl create -f "{{proj_working_dir}}/{{kube_deployment_manifest_path}}/mongodb-deployment.yaml"
+        kubectl create -f "{{proj_working_dir}}/{{kube_svc_manifest_path}}/mongodb-service.yaml"
+
+        kubectl create -f "{{proj_working_dir}}/{{kube_deployment_manifest_path}}/node-tasks-app-deployment.yaml"
+        kubectl create -f "{{proj_working_dir}}/{{kube_svc_manifest_path}}/node-tasks-app-service.yaml"
+        
+        kubectl create -f "{{proj_working_dir}}/{{kube_deployment_manifest_path}}/react-tasks-app-deployment.yaml"
+        kubectl create -f "{{proj_working_dir}}/{{kube_svc_manifest_path}}/react-tasks-app-service.yaml"
+      register: deployment_op
+    
+    - name: Deployment Outputs
+      debug:
+        var: deployment_op
+    
+        
+        
+
+      

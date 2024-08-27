@@ -12,7 +12,7 @@ class Deployment:
         self.__project_root: str = f"{os.getcwd()}/deployment/scripts/src"
         self.__inventory_path: str = f"{self.__project_root}/config/{env}/hosts"
         self.__playbook_path: str = f"{self.__project_root}/playbooks/{env}/app_deploy.yaml"
-        self.__play_cmd: List[str] = shlex.split(f"ansible-playbook -i {self.__inventory_path} {self.__playbook_path}")
+        self.__play_cmd: List[str] = shlex.split(f"ansible-playbook -i {self.__inventory_path} {self.__playbook_path} --extra-vars 'proj_working_dir={self.__project_root}' ")
 
     def perform_deployment(self)->None:
         try:
