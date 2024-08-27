@@ -4,7 +4,7 @@
   gather_facts: true
   vars:
     deployments_path: "{{proj_working_dir}}/kubernetes-manifests/deployments"
-    servicess_path: "{{proj_working_dir}}/kubernetes-manifests/services"
+    services_path: "{{proj_working_dir}}/kubernetes-manifests/services"
   tasks:
     - name: Creating namespace for application
       kubernetes.core.k8s:
