@@ -23,6 +23,14 @@ pipeline{
                 git url:'https://github.com/eswarmaganti/cicd-tasks-app.git',branch:'main'
             }
         }
+        stage('Fetch Runing Kubernetes Objects'){
+            steps{
+                sh "kubectl get deployments"
+                sh "kubectl get rs"
+                sh "kubectl get pods"
+                sh "kubectl get svc"
+            }
+        }
         stage('DEV Deployment'){
             steps{
                 script{
