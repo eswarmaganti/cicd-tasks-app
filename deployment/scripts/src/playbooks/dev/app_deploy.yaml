@@ -10,6 +10,8 @@
         path: /opt/SP
         state: directory
         mode: '0775'
+      become: yes
+      become_user: root
 
     # pulling the latest compose file changes
     - name: pull the changes of git repo
