@@ -1,26 +1,66 @@
 ---
-- name: Deploying the Application to AWS EKS Kubernetes
+- name: Deploying the Application to AWS EKS Kubernetes Cluster
   hosts: localhost
   gather_facts: true
   vars:
-    kube_deployment_manifest_path: "kubernetes-manifests/deployments"
-    kube_svc_manifest_path: "kubernetes-manifests/services"
+    deployments_path: "{{proj_working_dir}}/kubernetes-manifests/deployments"
+    servicess_path: "{{proj_working_dir}}/kubernetes-manifests/services"
   tasks:
-    - name: Create Kubernetes Deployments and Services
-      shell: |
-        kubectl create -f "{{proj_working_dir}}/{{kube_deployment_manifest_path}}/mongodb-deployment.yaml"
-        kubectl create -f "{{proj_working_dir}}/{{kube_svc_manifest_path}}/mongodb-service.yaml"
+    - name: Creating Kubernetes Deployment for MongoDB
+      kubernetes.core.k8s:
+        state: present
+        src: "{{deployments_path}}/mongodb-deployment.yaml"
+      register: mongodb_deployment_op
 
-        kubectl create -f "{{proj_working_dir}}/{{kube_deployment_manifest_path}}/node-tasks-app-deployment.yaml"
-        kubectl create -f "{{proj_working_dir}}/{{kube_svc_manifest_path}}/node-tasks-app-service.yaml"
-        
-        kubectl create -f "{{proj_working_dir}}/{{kube_deployment_manifest_path}}/react-tasks-app-deployment.yaml"
-        kubectl create -f "{{proj_working_dir}}/{{kube_svc_manifest_path}}/react-tasks-app-service.yaml"
-      register: deployment_op
+    - name: Creating Kubernetes Service for MongoDB Deployment
+      kubernetes.core.k8s:
+        state: present
+        src: "{{services_path}/mongodb-service.yaml"
+      register: mongodb_service_op
     
-    - name: Deployment Outputs
+    - name: Creating Kubernetes Deployment for Node Tasks App
+      kubernetes.core.k8s:
+        state: present
+        src: "{{deployments_path}}/node-tasks-app-deployment.yaml"
+      register: node_tasks_app_deployment_op
+
+    - name: Creating Kubernetes Service for Node Tasks App Deployment
+      kubernetes.core.k8s:
+        state: present
+        src: "{{services_path}/node-tasks-app-service.yaml"
+      register: node_tasks_app_service_op
+
+    - name: Creating Kubernetes Deployment for React Tasks App
+      kubernetes.core.k8s:
+        state: present
+        src: "{{deployments_path}}/react-tasks-app-deployment.yaml"
+      register: react_tasks_app_deployment_op
+      
+
+    - name: Creating Kubernetes Service for React Tasks App Deployment
+      kubernetes.core.k8s:
+        state: present
+        src: "{{services_path}/react-tasks-app-service.yaml"
+      register: react_tasks_app_service_op
+    
+    - name: MongoDB Deployment Outputs
       debug:
-        var: deployment_op
+        var: mongodb_deployment_op
+    - name: MongoDB Deployment Service Outputs
+      debug:
+        var: mongodb_service_op
+    - name: Node Tasks App Deployment Outputs
+      debug:
+        var: node_tasks_app_deployment_op
+    - name: Node Tasks App Deployment Service Outputs
+      debug:
+        var: node_tasks_app_service_op
+    - name: React Tasks App Deployment Outputs
+      debug:
+        var: react_tasks_app_deployment_op
+    - name: React Tasks App Deployment Service Outputs
+      debug:
+        var: react_tasks_app_service_op
     
         
         

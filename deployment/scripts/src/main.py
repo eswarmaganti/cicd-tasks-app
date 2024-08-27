@@ -21,11 +21,12 @@ class Deployment:
             if res.returncode != 0:
                 print(f"*** Error: Failed to run {self.__env} Deployment playbook successfully: {res.stderr}")
                 raise Exception
+            
             print(f"*** Success: {self.__env} Deployment is successfully completed ***")
 
         except Exception as e:
             print(f"*** Error: An Exception occured while {self.__env} deployment: {str(e)} ***")
-            exit(0)
+            exit(1)
 
 # main starts here
 if __name__ == "__main__":
@@ -36,4 +37,4 @@ if __name__ == "__main__":
 
     except Exception as e:
         print(f"*** Error: Something went wrong while performing deployment: {str(e)} ***")
-        exit(0)
+        exit(1)
