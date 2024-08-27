@@ -17,9 +17,9 @@ resource "aws_eks_node_group" "eks_node_group" {
   capacity_type   = "ON_DEMAND"
   subnet_ids      = var.private_subnet_ids
   scaling_config {
-    max_size     = 4
-    min_size     = 2
-    desired_size = 2
+    max_size     = 6
+    min_size     = 3
+    desired_size = 4
   }
   update_config {
     max_unavailable = 1

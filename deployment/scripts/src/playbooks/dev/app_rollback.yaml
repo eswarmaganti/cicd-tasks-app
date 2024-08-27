@@ -1,0 +1,17 @@
+---
+- name: Playbook to rollback the docker containers
+  hosts: all
+  gather_facts: true
+  vars:
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+    project_src: "/opt/SP/mern-tasks-app"
+  tasks:
+    - name: Stop all the running docker containers
+      community.docker.docker_compose_v2:
+        state: absent
+        project_src: "{{project_src}}"
+      register: output
+
+    - name: Logging the rollback output
+      debug:
+        var: output

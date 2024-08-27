@@ -4,7 +4,10 @@
   gather_facts: true
   vars:
     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+    project_src: "/opt/SP/mern-tasks-app"
   tasks:
+
+    # task to create a directory to store source code
     - name: Create the directory to store source code
       file:
         path: /opt/SP
@@ -12,6 +15,8 @@
         mode: '0775'
       become: yes
       become_user: root
+
+      # owning the source code direcotry to ubuntu user
     - name: Change the permissions to dir
       shell: |
         chown ubuntu: /opt/SP
@@ -22,21 +27,20 @@
     - name: pull the changes of git repo
       git:
         repo: https://github.com/eswarmaganti/mern-tasks-app.git
-        dest: /opt/SP/mern-tasks-app
+        dest: "{{project_src}}"
     
     # stopping existing docker container services
     - name: kill existing docker services
       community.docker.docker_compose_v2:
-        project_src: /opt/SP/mern-tasks-app
+        project_src: "{{project_src}}"
         state: absent
 
     # task to start the docker container services using compose
     - name: start the docker container services using compose
       community.docker.docker_compose_v2:
-          project_src: /opt/SP/mern-tasks-app
+          project_src: "{{project_src}}"
       register: output
 
-       
     # debugging the output
     - name: debug output
       debug:

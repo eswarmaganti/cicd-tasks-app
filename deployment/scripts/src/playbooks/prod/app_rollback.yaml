@@ -1,0 +1,68 @@
+---
+- name: Playbook to rollback all the Kubernetes services in EKS
+  hosts: localhost
+  gather_facts: true
+  vars:
+    deployments_path: "{{proj_working_dir}}/kubernetes-manifests/deployments"
+    services_path: "{{proj_working_dir}}/kubernetes-manifests/services"
+  tasks:
+    - name: Delete React Application Service
+      kubernetes.core.k8s:
+        state: absent
+        namespace: production
+        src: "{{services_path}}/react-tasks-app-service.yaml"
+      register: react_tasks_app_service_op
+
+    - name: Delete Node Tasks Application Service
+      kubernetes.core.k8s:
+        state: absent
+        namespace: production
+        src: "{{services_path}}/node-tasks-app-service.yaml"
+      register: node_tasks_app_service_op
+
+    - name: Delete MongoDB Service
+      kubernetes.core.k8s:
+        state: absent
+        namespace: production
+        src: "{{services_path}}/mongodb-service.yaml"
+      register: mongodb_service_op
+
+    - name: Delete React Application Deployment
+      kubernetes.core.k8s:
+        state: absent
+        namespace: production
+        src: "{{services_path}}/react-tasks-app-deployment.yaml"
+      register: react_tasks_app_deployment_op
+
+    - name: Delete Node Tasks Application Deployment
+      kubernetes.core.k8s:
+        state: absent
+        namespace: production
+        src: "{{deployments_path}}/node-tasks-app-deployment.yaml"
+      register: node_tasks_app_deployment_op
+
+    - name: Delete MongoDB Deployment
+      kubernetes.core.k8s:
+        state: absent
+        namespace: production
+        src: "{{services_path}}/mongodb-deployment.yaml"
+      register: mongodb_deployment_op
+
+    - name: MongoDB Rollback Deployment Outputs
+      debug:
+        var: mongodb_deployment_op
+    - name: MongoDB Rollback Deployment Service Outputs
+      debug:
+        var: mongodb_service_op
+    - name: Node Tasks App Rollback Deployment Outputs
+      debug:
+        var: node_tasks_app_deployment_op
+    - name: Node Tasks App Rollback Deployment Service Outputs
+      debug:
+        var: node_tasks_app_service_op
+    - name: React Tasks App Rollback Deployment Outputs
+      debug:
+        var: react_tasks_app_deployment_op
+    - name: React Tasks App Rollback Deployment Service Outputs
+      debug:
+        var: react_tasks_app_service_op
