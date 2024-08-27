@@ -27,7 +27,7 @@ pipeline{
             steps{
                 script{
                     sh "echo '--- Deployment Script Triggered ---'"
-                    sh '/usr/bin/python3 ${SCRIPT_PATH}'
+                    sh '/usr/bin/python3 ${SCRIPT_PATH} dev'
                 }
             }
         }

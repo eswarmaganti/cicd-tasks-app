@@ -29,7 +29,7 @@ class Deployment:
 # main starts here
 if __name__ == "__main__":
     try:
-        env = sys.argv[0]
+        env = sys.argv[1]
         obj = Deployment(env)
         obj.perform_deployment()
 
