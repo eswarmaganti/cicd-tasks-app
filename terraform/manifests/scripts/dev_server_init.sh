@@ -30,13 +30,13 @@ yes | sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-p
 yes | usermod -aG docker ubuntu
 yes | sudo reboot
 
-# cloning the source code repo and running the application
-sudo mkdir /opt/SP
-sudo chown ubuntu: /opt/SP
+# # cloning the source code repo and running the application
+# sudo mkdir /opt/SP
+# sudo chown ubuntu: /opt/SP
 
-# cloning git repo and initializing the application
-git clone https://github.com/eswarmaganti/mern-tasks-app.git /opt/SP/mern-tasks-app
-docker compose -f /opt/SP/mern-tasks-app/compose.yaml up -d
+# # cloning git repo and initializing the application
+# git clone https://github.com/eswarmaganti/mern-tasks-app.git /opt/SP/mern-tasks-app
+# docker compose -f /opt/SP/mern-tasks-app/compose.yaml up -d
 
 # changing the permissions of private key file
 sudo chmod 400 /home/ubuntu/.ssh/dev_ec2

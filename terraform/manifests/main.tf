@@ -71,14 +71,13 @@ module "route53" {
 }
 
 
-# module "eks" {
-#   source = "./eks"
-#   master_arn = module.iam.master_arn
-#   worker_arn = module.iam.worker_arn
-#   public_subnet_ids = module.vpc.public_subnet_ids
-#   availability_zones = var.availability_zones
-#   instance_type = var.instance_type
-#   public_key_name = var.public_key_name
-#   eks_sg_id = module.security_groups.eks_sg_id
-#   ubuntu_ami = module.ami.ubuntu_ami
-# }
+module "eks" {
+  source             = "./eks"
+  master_arn         = module.iam.master_arn
+  worker_arn         = module.iam.worker_arn
+  private_subnet_ids = module.vpc.private_subnet_ids
+  availability_zones = var.availability_zones
+  instance_type      = var.instance_type
+  public_key_name    = var.public_key_name
+  eks_sg_id          = module.security_groups.eks_sg_id
+}
