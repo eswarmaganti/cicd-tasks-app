@@ -1,7 +1,6 @@
 ---
 - name: Deploying the Application to AWS EKS Kubernetes
   hosts: localhost
-  become: true
   gather_facts: true
   vars:
     kube_deployment_manifest_path: "kubernetes-manifests/deployments"
