@@ -24,7 +24,7 @@
       kubernetes.core.k8s:
         state: present
         namespace: production
-        src: "{{services_path}/mongodb-service.yaml"
+        src: "{{services_path}}/mongodb-service.yaml"
       register: mongodb_service_op
     
     - name: Creating Kubernetes Deployment for Node Tasks App
@@ -38,7 +38,7 @@
       kubernetes.core.k8s:
         state: present
         namespace: production
-        src: "{{services_path}/node-tasks-app-service.yaml"
+        src: "{{services_path}}/node-tasks-app-service.yaml"
       register: node_tasks_app_service_op
 
     - name: Creating Kubernetes Deployment for React Tasks App
@@ -53,7 +53,7 @@
       kubernetes.core.k8s:
         state: present
         namespace: production
-        src: "{{services_path}/react-tasks-app-service.yaml"
+        src: "{{services_path}}/react-tasks-app-service.yaml"
       register: react_tasks_app_service_op
     
     - name: MongoDB Deployment Outputs
