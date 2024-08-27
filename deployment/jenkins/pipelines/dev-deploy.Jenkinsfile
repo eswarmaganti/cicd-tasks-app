@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment{
         GIT_REPO_URL= 'https://github.com/eswarmaganti/mern-tasks-app.git'
-        SCRIPT_PATH= 'jenkins/deployments/dev/src/main.py'
+        SCRIPT_PATH= 'scripts/src/main.py'
     }
     tools {nodejs 'node'}
     stages{
