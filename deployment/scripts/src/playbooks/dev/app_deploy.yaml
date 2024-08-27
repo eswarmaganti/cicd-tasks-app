@@ -5,6 +5,11 @@
   vars:
     ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
   tasks:
+    - name: Create the directory to store source code
+      file:
+        path: /opt/SP
+        state: directory
+        mode: '0775'
 
     # pulling the latest compose file changes
     - name: pull the changes of git repo
@@ -24,6 +29,7 @@
           project_src: /opt/SP/mern-tasks-app
       register: output
 
+       
     # debugging the output
     - name: debug output
       debug:
