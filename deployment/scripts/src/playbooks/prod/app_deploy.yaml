@@ -12,34 +12,39 @@
         kind: Namespace
         api_version: v1
         state: present
-        
+
     - name: Creating Kubernetes Deployment for MongoDB
       kubernetes.core.k8s:
         state: present
+        namespace: production
         src: "{{deployments_path}}/mongodb-deployment.yaml"
       register: mongodb_deployment_op
 
     - name: Creating Kubernetes Service for MongoDB Deployment
       kubernetes.core.k8s:
         state: present
+        namespace: production
         src: "{{services_path}/mongodb-service.yaml"
       register: mongodb_service_op
     
     - name: Creating Kubernetes Deployment for Node Tasks App
       kubernetes.core.k8s:
         state: present
+        namespace: production
         src: "{{deployments_path}}/node-tasks-app-deployment.yaml"
       register: node_tasks_app_deployment_op
 
     - name: Creating Kubernetes Service for Node Tasks App Deployment
       kubernetes.core.k8s:
         state: present
+        namespace: production
         src: "{{services_path}/node-tasks-app-service.yaml"
       register: node_tasks_app_service_op
 
     - name: Creating Kubernetes Deployment for React Tasks App
       kubernetes.core.k8s:
         state: present
+        namespace: production
         src: "{{deployments_path}}/react-tasks-app-deployment.yaml"
       register: react_tasks_app_deployment_op
       
@@ -47,6 +52,7 @@
     - name: Creating Kubernetes Service for React Tasks App Deployment
       kubernetes.core.k8s:
         state: present
+        namespace: production
         src: "{{services_path}/react-tasks-app-service.yaml"
       register: react_tasks_app_service_op
     
