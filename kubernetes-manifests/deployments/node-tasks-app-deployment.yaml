@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: node-tasks-api
-          image: eswarmaganti/node-tasks-app:arm64
+          image: eswarmaganti/node-tasks-app:latest
           ports:
             - containerPort: 5050
           env:

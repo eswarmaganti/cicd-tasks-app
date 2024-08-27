@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: react-tasks-app-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: react-tasks-app
   ports:
-    - nodePort: 30007
+    - protocol: TCP
       port: 80
       targetPort: 80
   

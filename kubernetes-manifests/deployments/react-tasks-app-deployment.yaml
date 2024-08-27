@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: react-tasks-app
-          image: eswarmaganti/react-tasks-app:arm64
+          image: eswarmaganti/react-tasks-app:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
