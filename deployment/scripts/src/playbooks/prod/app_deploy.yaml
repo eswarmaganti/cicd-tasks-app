@@ -6,6 +6,13 @@
     deployments_path: "{{proj_working_dir}}/kubernetes-manifests/deployments"
     servicess_path: "{{proj_working_dir}}/kubernetes-manifests/services"
   tasks:
+    - name: Creating namespace for application
+      kubernetes.core.k8s:
+        name: production
+        kind: Namespace
+        api_version: v1
+        state: present
+        
     - name: Creating Kubernetes Deployment for MongoDB
       kubernetes.core.k8s:
         state: present
